@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProseQ AI — The writing workspace that thinks with you</title>
+    <meta
+      name="description"
+      content="ProseQ AI is a calm, focused writing workspace with AI-assisted editing, tone controls, summarization, templates, brand voice, and content planning. (Frontend demonstration project.)"
+    />
+    <meta name="author" content="Talha" />
+    <meta name="theme-color" content="#faf8f4" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ProseQ AI" />
+    <meta property="og:title" content="ProseQ AI — The writing workspace that thinks with you" />
+    <meta
+      property="og:description"
+      content="Draft, refine, and organize everything you write — AI-assisted editing tools, templates, brand voice, and content planning in one focused workspace."
+    />
+    <meta property="og:url" content="https://talhadev-pk.github.io/proseq-ai/" />
+    <meta property="og:image" content="https://talhadev-pk.github.io/proseq-ai/og-image.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ProseQ AI — The writing workspace that thinks with you" />
+    <meta
+      name="twitter:description"
+      content="Draft, refine, and organize everything you write — AI-assisted editing tools, templates, brand voice, and content planning in one focused workspace."
+    />
+    <meta name="twitter:image" content="https://talhadev-pk.github.io/proseq-ai/og-image.png" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <script>
+      // Apply the persisted theme before first paint to avoid a flash of the wrong theme.
+      // Reads the same key the preferences store uses. Fails silently.
+      (function () {
+        try {
+          var raw = localStorage.getItem('proseq:preferences');
+          var theme = 'system';
+          if (raw) {
+            var parsed = JSON.parse(raw);
+            if (parsed && parsed.state && parsed.state.theme) theme = parsed.state.theme;
+          }
+          var dark =
+            theme === 'dark' ||
+            (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {
+          /* no-op */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

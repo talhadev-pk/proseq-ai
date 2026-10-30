@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   ProseQ AI design tokens — warm ivory editorial theme with muted violet
+   and electric blue accents. Dark theme inverts to deep warm charcoal.
+--------------------------------------------------------------------------- */
+:root {
+  --c-bg: #faf8f4;
+  --c-paper: #ffffff;
+  --c-sand: #f3efe6;
+  --c-ink: #211c12;
+  --c-muted: #6d6656;
+  --c-faint: #9d9581;
+  --c-border: #e9e3d4;
+  --c-border-strong: #d9d1bc;
+  --c-violet: #6d5ae0;
+  --c-violet-deep: #5443c4;
+  --c-violet-soft: #efecfc;
+  --c-blue: #2f6bff;
+  --c-blue-soft: #eaf1ff;
+  --c-moss: #22764f;
+  --c-moss-soft: #e6f3ec;
+  --c-amber: #9c6209;
+  --c-amber-soft: #fbf1df;
+  --c-clay: #c24141;
+  --c-clay-soft: #fbecec;
+}
+
+.dark {
+  --c-bg: #141210;
+  --c-paper: #1c1915;
+  --c-sand: #26211a;
+  --c-ink: #f0ece1;
+  --c-muted: #a89f8b;
+  --c-faint: #6f6857;
+  --c-border: #2c2720;
+  --c-border-strong: #3b3428;
+  --c-violet: #a291ff;
+  --c-violet-deep: #bcaeff;
+  --c-violet-soft: #2a2440;
+  --c-blue: #7aa6ff;
+  --c-blue-soft: #1e2942;
+  --c-moss: #55b389;
+  --c-moss-soft: #1c2f26;
+  --c-amber: #e0a84e;
+  --c-amber-soft: #33270f;
+  --c-clay: #e08585;
+  --c-clay-soft: #3a1f1f;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+
+  ::selection {
+    background: var(--c-violet);
+    color: #fff;
+  }
+
+  /* Visible, on-brand focus indicators */
+  :focus-visible {
+    outline: 2px solid var(--c-violet);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Thin, quiet scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--c-border-strong) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--c-border-strong);
+    border-radius: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .text-gradient-brand {
+    background: linear-gradient(100deg, var(--c-violet) 10%, var(--c-blue) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .surface-card {
+    @apply rounded-2xl border border-line bg-paper shadow-soft;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-line bg-paper px-3.5 py-2.5 text-sm text-ink placeholder:text-faint transition-colors focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/25;
+  }
+
+  /* Editor prose — the beautiful writing surface */
+  .prose-editor {
+    @apply text-ink;
+    font-family: 'Fraunces Variable', Fraunces, Georgia, serif;
+    font-size: var(--editor-font-size, 17px);
+    line-height: 1.85;
+    font-variation-settings: 'opsz' 14;
+  }
+  .prose-editor:focus {
+    outline: none;
+  }
+  .prose-editor p {
+    margin: 0 0 1.05em;
+  }
+  .prose-editor h1 {
+    font-size: 1.7em;
+    font-weight: 640;
+    line-height: 1.3;
+    margin: 1.4em 0 0.6em;
+    letter-spacing: -0.01em;
+  }
+  .prose-editor h2 {
+    font-size: 1.35em;
+    font-weight: 620;
+    line-height: 1.35;
+    margin: 1.3em 0 0.5em;
+  }
+  .prose-editor h3 {
+    font-size: 1.12em;
+    font-weight: 620;
+    margin: 1.2em 0 0.4em;
+  }
+  .prose-editor ul,
+  .prose-editor ol {
+    padding-left: 1.5em;
+    margin: 0 0 1.05em;
+  }
+  .prose-editor ul {
+    list-style: disc;
+  }
+  .prose-editor ol {
+    list-style: decimal;
+  }
+  .prose-editor li {
+    margin: 0.3em 0;
+  }
+  .prose-editor li > p {
+    margin: 0;
+  }
+  .prose-editor blockquote {
+    border-left: 3px solid var(--c-violet);
+    padding: 0.15em 0 0.15em 1.1em;
+    margin: 0 0 1.05em;
+    color: var(--c-muted);
+    font-style: italic;
+  }
+  .prose-editor hr {
+    border: none;
+    border-top: 1px solid var(--c-border);
+    margin: 1.6em auto;
+    width: 42%;
+  }
+  .prose-editor strong {
+    font-weight: 640;
+  }
+  .prose-editor p.is-editor-empty:first-child::before {
+    color: var(--c-faint);
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
+
+  /* Marketing kicker label */
+  .kicker {
+    @apply inline-flex items-center gap-2 rounded-full border border-line bg-paper px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-muted;
+  }
+
+  .skeleton {
+    @apply rounded-lg bg-sand;
+    background-image: linear-gradient(90deg, transparent, rgb(255 255 255 / 35%), transparent);
+    background-repeat: no-repeat;
+    background-size: 400px 100%;
+    animation: shimmer 1.4s linear infinite;
+  }
+  .dark .skeleton {
+    background-image: linear-gradient(90deg, transparent, rgb(255 255 255 / 6%), transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
